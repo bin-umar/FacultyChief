@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, Output } from '@angular/core';
 import { LoadKafService } from '../../services/load-kaf.service';
 import { AuthService} from '../../services/auth.service';
+import { SettingsService } from '../../services/settings.service';
 
 import { Teacher } from '../../models/load';
 import { ILoadKafSubject, LoadKaf, LoadKafReport } from '../../models/load-kaf';
@@ -26,7 +27,7 @@ export class TeacherLoadComponent implements OnInit {
   };
 
   faculty = this.kafedra;
-  teachers: Teacher[];
+  teachers: Teacher[] = [];
   selectedTeacher: Teacher = {
     id: 0,
     fio: '',
@@ -44,10 +45,12 @@ export class TeacherLoadComponent implements OnInit {
   };
 
   subjects: ILoadKafSubject[] = [];
+  kafedras: Department[] = [];
 
   constructor(private lkService: LoadKafService,
+              private stService: SettingsService,
               private auth: AuthService) {
-    this.teachers = this.lkService.teachers;
+    this.kafedras = this.stService.kafedras;
   }
 
   ngOnInit() {
@@ -55,7 +58,8 @@ export class TeacherLoadComponent implements OnInit {
       id: +this.depInfo.kfId,
       fullName: this.depInfo.kfFullName,
       shortName: this.depInfo.kfShortName,
-      chief: this.depInfo.kfChief
+      chief: this.depInfo.kfChief,
+      chiefPosition: this.depInfo.kfChiefPosition
     };
 
     this.faculty = {
@@ -87,6 +91,14 @@ export class TeacherLoadComponent implements OnInit {
             this.countTeacherLoad();
           }
         });
+      }
+    });
+  }
+
+  getContentByKfId() {
+    this.stService.getTeachersByKf(this.kafedra.id).subscribe(resp => {
+      if (!resp.error) {
+        this.teachers = resp.data.slice();
       }
     });
   }

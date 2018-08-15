@@ -12,7 +12,6 @@ import { SettingsService } from './services/settings.service';
 import { DepartmentInfo, UserInfo } from './models/common';
 
 import { TeacherLoadComponent } from './components/teacher-load/teacher-load.component';
-import { DistributionComponent } from './components/distribution/distribution.component';
 import { CurriculumListComponent } from './components/curriculum-list/curriculum-list.component';
 import { LoadKafComponent } from './components/load-kaf/load-kaf.component';
 
@@ -21,7 +20,6 @@ import { LoadKafComponent } from './components/load-kaf/load-kaf.component';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
   entryComponents: [
-    DistributionComponent,
     TeacherLoadComponent,
     CurriculumListComponent,
     LoadKafComponent
@@ -32,12 +30,11 @@ export class AppComponent implements OnDestroy {
   @ViewChild('content', {read: ViewContainerRef})
       parent: ViewContainerRef;
 
-  type: Type<DistributionComponent>;
-  cmpRef: ComponentRef<DistributionComponent>;
+  type: Type<CurriculumListComponent>;
+  cmpRef: ComponentRef<CurriculumListComponent>;
   depInfo: DepartmentInfo;
 
   component = '';
-  distributionCmp = DistributionComponent;
   teacherComponent = TeacherLoadComponent;
   curriculumListComponent = CurriculumListComponent;
   loadKafCmp = LoadKafComponent;
@@ -70,11 +67,9 @@ export class AppComponent implements OnDestroy {
                 if (!resp2.error) {
                   this.depInfo = resp2.data;
                   this.stService.getLoadCoefficients();
-                  this.stService.getTeachersByKf(this.depInfo.kfId);
+                  this.stService.getKafedraByFacultyId(this.depInfo.fcId);
                 }
               });
-
-              // this.createComponentDynamically(this.distributionCmp);
             }
           });
         }

@@ -1,12 +1,23 @@
 <mat-card class="mat-elevation-z8 d-print-none">
-  <div style="width: 90%">
-    <mat-select placeholder="Омӯзгорро интихоб намоед"
-                [(value)]="selectedTeacher"
-                (selectionChange)="selectTeacher();">
-      <mat-option *ngFor="let teacher of teachers" [value]="teacher">
-        {{ teacher.fio + ' ' +  teacher.position }}
-      </mat-option>
-    </mat-select>
+  <div style="width: 47%; display: inline-block; margin-right: 10px;">
+    <mat-form-field style="width: 100%;" class="forty-width">
+      <mat-select (selectionChange)="getContentByKfId();" [(value)]="kafedra" placeholder="Кафедраро интихоб намоед" required>
+        <mat-option *ngFor="let kafedra of kafedras" [value]="kafedra">
+          {{ kafedra.fullName | getName:'tj' }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div style="width: 47%; display: inline-block;">
+    <mat-form-field style="width: 100%">
+      <mat-select placeholder="Омӯзгорро интихоб намоед"
+                  [(value)]="selectedTeacher"
+                  (selectionChange)="selectTeacher();">
+        <mat-option *ngFor="let teacher of teachers" [value]="teacher">
+          {{ teacher.fio + ' ' +  teacher.position }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
   </div>
   <div>
     <span class="print">
@@ -324,7 +335,7 @@
   </div>
 
   <div class="half-width">
-    <div>{{ depInfo.kfChiefPosition + 'и' }}
+    <div>{{ kafedra.chiefPosition + 'и' }}
       <span matTooltip="{{ kafedra.fullName | getName:'tj' }}">
           {{ kafedra.shortName | getName:'tj' }}
         </span>

@@ -26,11 +26,14 @@ export class LoadKafComponent implements OnInit {
   };
 
   faculty = this.kafedra;
+  kafedras: Department[] = [];
   subjects: ILoadKafSubject[] = [];
   isError = false;
 
   constructor(private auth: AuthService,
-              private lkService: LoadKafService) {}
+              private lkService: LoadKafService) {
+    this.kafedras = this.lkService.kafedras;
+  }
 
   ngOnInit() {
     this.kafedra = {
@@ -47,6 +50,9 @@ export class LoadKafComponent implements OnInit {
       chief: this.depInfo.fcChief
     };
 
+  }
+
+  getContentByKfId() {
     this.lkService.getLoadKafReport(this.kafedra.id).subscribe(resp => {
       if (!resp.error) {
 

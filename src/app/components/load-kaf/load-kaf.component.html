@@ -1,4 +1,14 @@
 
+<mat-card style="width: 60%; margin: auto" class="d-print-none">
+  <mat-form-field style="width: 100%" class="forty-width">
+    <mat-select (selectionChange)="getContentByKfId();" [(value)]="kafedra" placeholder="Кафедраро интихоб намоед" required>
+      <mat-option *ngFor="let kafedra of kafedras" [value]="kafedra">
+        {{ kafedra.fullName | getName:'tj' }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</mat-card>
+
 <mat-card class="mat-elevation-z8">
   <div class="text-center">
     <h3>Сарборӣ</h3>
@@ -339,5 +349,5 @@
   <h3><strong>Эзоҳ:</strong></h3>
   <h5>Фаннҳое ки бо ранги зард ҷудо шудаанд селенамоӣ шудаанд вале миқдори соатҳои дарсиашон якхела нестанд,
   масалан миқдори соатҳои амалӣ, лабараторӣ ё дигарашон баробар нестанд.
-  Аз кормандони шуъбаи таълим хоҳиш намоед, ки иқтибосҳои ин гуруҳҳоро лутфан дида бароянд!!!</ h5>
+  Аз кормандони шуъбаи таълим хоҳиш намоед, ки иқтибосҳои ин гуруҳҳоро лутфан дида бароянд!!!</h5>
 </div>

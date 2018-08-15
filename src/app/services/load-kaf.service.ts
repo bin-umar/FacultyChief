@@ -7,18 +7,18 @@ import { SettingsService } from './settings.service';
 
 import { ILoadKaf } from '../models/load-kaf';
 import { ICoefficient } from '../models/settings';
-import { Teacher } from '../models/load';;
+import { Department } from '../models/common';
 
 @Injectable()
 export class LoadKafService {
 
   coefs: ICoefficient;
-  teachers: Teacher[];
+  kafedras: Department[] = [];
 
   constructor(private auth: AuthService,
               private stService: SettingsService) {
     this.coefs = this.stService.coefs;
-    this.teachers = this.stService.teachers;
+    this.kafedras = this.stService.kafedras;
   }
 
   public getLoadKafReport(kf_id: number) {

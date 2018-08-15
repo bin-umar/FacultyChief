@@ -17,11 +17,8 @@ import { SettingsService } from './services/settings.service';
 import { CurriculumListComponent } from './components/curriculum-list/curriculum-list.component';
 import { ExtractionComponent } from './components/extraction/extraction.component';
 import { AppComponent } from './app.component';
-import { FkFilterComponent } from './components/fk-filter/fk-filter.component';
-import { DistributionComponent } from './components/distribution/distribution.component';
 import { TeacherLoadComponent } from './components/teacher-load/teacher-load.component';
 import { LoadKafComponent } from './components/load-kaf/load-kaf.component';
-import { CourseWorksComponent } from './components/course-works/course-works.component';
 
 import { GetNamePipe } from './pipes/get-name.pipe';
 import { EducationYearPipe } from './pipes/education-year.pipe';
@@ -30,16 +27,13 @@ import { TeacherNamePipe } from './pipes/teacher-name.pipe';
 @NgModule({
   declarations: [
     AppComponent,
-    DistributionComponent,
-    FkFilterComponent,
     TeacherNamePipe,
     GetNamePipe,
     TeacherLoadComponent,
     CurriculumListComponent,
     ExtractionComponent,
     EducationYearPipe,
-    LoadKafComponent,
-    CourseWorksComponent
+    LoadKafComponent
   ],
   imports: [
     BrowserModule,
@@ -66,7 +60,6 @@ import { TeacherNamePipe } from './pipes/teacher-name.pipe';
     MatSliderModule,
     MatSnackBarModule
   ],
-  entryComponents: [ CourseWorksComponent ],
   providers: [ AuthService, SettingsService ],
   bootstrap: [ AppComponent ]
 })

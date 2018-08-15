@@ -5,12 +5,14 @@ import { map } from 'rxjs/operators';
 import { AuthService } from './auth.service';
 import { ITeacher, Teacher } from '../models/load';
 import { ICoefficient, SettingsResp } from '../models/settings';
+import { Department, IDepartment } from '../models/common';
 
 @Injectable()
 export class SettingsService {
 
   coefs: ICoefficient;
-  teachers: Teacher[];
+  kafedras: Department[] = [];
+
   constructor(private auth: AuthService) { }
 
   getLoadCoefficients() {
@@ -33,10 +35,10 @@ export class SettingsService {
     });
   }
 
-  getTeachersByKf (kfId: number) {
+  getKafedraByFacultyId(fcId: number) {
     const body = new HttpParams()
-      .set('kf_id', kfId.toString())
-      .set('route', 'teachers')
+      .set('id', fcId.toString())
+      .set('route', 'kafedra')
       .set('operation', 'list')
       .set('token', this.auth.token);
 
@@ -44,25 +46,34 @@ export class SettingsService {
       {
         headers: new HttpHeaders()
           .set('Content-Type', 'application/x-www-form-urlencoded')
-      }).pipe(map((response: ITeacher) => {
+      }).pipe(map((response: IDepartment) => {
       return response;
-    })).subscribe(response => {
-
-      if (!response.error) {
-        this.teachers = response.data.slice();
-        this.teachers.unshift({
-          id: 0,
-          fio: '',
-          position: '',
-          scienceDegree: '',
-          v1: null,
-          v2: null,
-          v3: null
+    })).subscribe(resp => {
+      if (!resp.error) {
+        this.kafedras = resp.data.slice();
+        this.kafedras.unshift( {
+          id: -1,
+          fullName: '',
+          shortName: '',
+          chief: ''
         });
       }
-
-    }, (error: HttpErrorResponse) => {
-      console.log(error);
     });
+  }
+
+  getTeachersByKf (kfId: number) {
+    const body = new HttpParams()
+      .set('kf_id', kfId.toString())
+      .set('route', 'teachers')
+      .set('operation', 'list')
+      .set('token', this.auth.token);
+
+    return this.auth.http.post(this.auth.host, body.toString(),
+      {
+        headers: new HttpHeaders()
+          .set('Content-Type', 'application/x-www-form-urlencoded')
+      }).pipe(map((response: ITeacher) => {
+      return response;
+    }));
   }
 }

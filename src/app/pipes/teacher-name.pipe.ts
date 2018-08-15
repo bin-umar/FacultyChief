@@ -6,8 +6,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class TeacherNamePipe implements PipeTransform {
 
   transform(fio: string): string {
-    if (fio === '') {
-      return fio;
+    if (fio === '' || fio === undefined) {
+      return '';
     } else {
       const arr = fio.split(" ");
       const surname = arr[0];

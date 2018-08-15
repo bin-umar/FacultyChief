@@ -18,9 +18,9 @@ export class CurriculumService {
                private auth: AuthService) {
   }
 
-  getAllCurriculums(kf_id: number): void {
+  getAllCurriculums(fc_id: number): void {
     const body = new HttpParams()
-      .set('id', kf_id.toString())
+      .set('fc_id', fc_id.toString())
       .set('route', 'extractions')
       .set('operation', 'list')
       .set('token', this.auth.token);
