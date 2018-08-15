@@ -1,0 +1,53 @@
+.example-container {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+}
+
+.example-header { min-height: 64px; padding: 8px 24px 0; }
+
+.mat-form-field { font-size: 14px; }
+
+.full-width { width: 100%; }
+
+.eighty-width { width: 80%; }
+
+.twenty-width { width: 19%; }
+
+.fifteen-width { width: 15%; }
+
+.thirty-width { width: 38.5%; }
+
+.sixteen-width { width: 16.6%; }
+
+.ten-width { width: 9.96%; }
+
+.twenty-one-width { width: 21%; }
+
+.mat-column-number {
+  flex: 0 0 40px;
+}
+
+.mat-column-name_tj {
+  flex: 0 0 35%;
+}
+
+.mat-column-name {
+  flex: 0 0 170px;
+}
+
+.mat-column-name_ru {
+  flex: 0 0 25%;
+}
+
+.mat-column-actions {
+  flex: 0 0 150px;
+}
+
+.mat-column-subjects_actions {
+  flex: 0 0 90px;
+}
+
+.isArch {
+  float: left;
+}

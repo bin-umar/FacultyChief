@@ -1,0 +1,233 @@
+table th, table td{
+  padding: 5px 0;
+  border: 1px solid #000;
+}
+
+table th{
+ background-color: #343a40;
+  color: #167F92;
+}
+
+table{
+  width: 100%;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.alert:first-child {
+  margin-top: 20px;
+}
+
+.alert {
+  margin-top: 10px;
+}
+
+.showConfig {
+  background-color: #FFF;
+  transition: background-color 0.1s;
+}
+
+.hovered {
+  cursor: pointer;
+  opacity: 0.4;
+}
+
+.bg-black{
+  background-color: black;
+}
+
+.settings{
+  color: transparent;
+  position: absolute;
+  margin-top: -35px;
+  height: 34px;
+  /*left: 95%;*/
+  width: 100%;
+  cursor: pointer;
+  text-align: center;
+  transition: color 0.1s;
+}
+
+.settings:hover {
+  color: white;
+}
+
+.settings div{
+  display: inline-block;
+  width: 49.8%;
+  height: inherit;
+  padding-top: 7px;
+}
+
+.settings div:first-child{
+  border-right: 2px solid #fff;
+}
+
+.settings div:hover{
+  background-color: rgba(255,255,255, 0.15);
+}
+
+.text-eee{
+  color: #eee;
+}
+
+.bg-eee {
+  background-color: #eeeeee !important;
+}
+
+table.standard-info td{
+  border: none;
+  padding: 5px 7px;
+}
+
+table.standard-info tr td:first-child{
+  width: 30%;
+  text-align: right;
+  font-weight: bold;
+}
+
+table.standard-info tr td:last-child{
+  text-align: left;
+}
+
+.one-fourth-width {
+  width: 24.5%;
+  margin-top: 50px;
+}
+
+mat-card{
+  margin: 20px auto;
+}
+
+th div{
+  height: 250px;
+  margin: auto;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
+.md-18 {
+  height: 18px;
+  width: 18px;
+  transition: color 0.1s ease-in;
+}
+
+.md-18.hovered-color:hover {
+  color: #ff0800;
+}
+
+.text-total {
+  color: #274c5e;
+  font-style: oblique;
+  font-weight: bold;
+}
+
+.fixed {
+  position: fixed;
+  left: 9.4%;
+  top: 0;
+}
+
+.print {
+  position: absolute;
+  bottom: 0;
+  right: 20px;
+}
+
+.sign-column {
+  width: 100px;
+}
+
+.extraction-footer {
+  font-size: 13px;
+  line-height: 20px;
+  font-style: italic;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.half-width {
+  margin: 10px 0;
+  width: 49.7%;
+  display: inline-block;
+}
+
+.hasError {
+  background-color: #ffeb3b;
+}
+
+/deep/ .extraction-footer .half-width {
+  width: 49.5%;
+  margin-bottom: 15px;
+  display: inline-block;
+}
+
+/deep/ .extraction-footer .half-width>div,
+/deep/ .extraction-footer .full-width>div{
+  display: inline-block;
+}
+
+.bg-aw {
+  background-color: antiquewhite;
+}
+
+/deep/ .sign-gap {
+  margin: 0 7px -27px 7px;
+}
+
+@media print {
+  /deep/ body {
+    margin: 0;
+    padding: 0;
+    color: #000 !important;
+    background: #FFF;
+    font-size: 7pt;
+  }
+
+  /deep/ @page {
+    margin: 10px 0 15px 0 ;
+  }
+
+  table{ margin: 0 0 13px 0;}
+
+  table tr {
+    height: 15px;
+  }
+
+  mat-card { margin: -10px 0 0 0;}
+
+  mat-card h3 { font-size: 18pt; }
+  h4 { font-size: 16px;}
+  mat-card h6 { font-size: 11pt; }
+
+  th div {
+    height: 140px;
+  }
+
+  #container {
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+
+  table th, table td{ padding: 1px 0;}
+
+  table th{
+    background-color: #fff;
+    color: #000;
+    font-size: 9pt;
+  }
+
+  .extraction .d-none {
+    display: table-cell !important;
+  }
+
+  /deep/ table { page-break-after: auto !important; }
+  /deep/ tr { page-break-inside: avoid !important; page-break-after: auto !important; }
+  /deep/ td { page-break-inside: avoid !important; page-break-after: auto !important; }
+  /deep/ thead { display: table-header-group !important; }
+  /deep/ tfoot { display: table-footer-group !important; }
+}

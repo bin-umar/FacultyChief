@@ -1,0 +1,77 @@
+/* fallback */
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(assets/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format('woff2');
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+  cursor: pointer;
+}
+
+.material-icons.md-24:hover{
+  font-size: 25px;
+}
+
+.hovered-color:hover{
+  color: #ff0800 !important;
+}
+
+.text-colored{
+  color: #167F92 !important;
+  font-size: 15px;
+}
+
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 {
+  font-size: 24px;
+  transition: font-size 0.1s, color 0.1s;
+}
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
+
+.half-width {
+  width: 48.5%;
+}
+
+.one-third-width{
+  width: 32%;
+}
+
+.toogle {
+  cursor: pointer;
+}
+
+.two-third-width{
+  width: 64%;
+}
+
+.locked {
+  opacity: 0.4;
+}
+
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(76,93,110,0.4);
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}

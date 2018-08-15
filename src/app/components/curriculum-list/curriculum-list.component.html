@@ -1,0 +1,67 @@
+<div class="d-print-none">
+  <div class="example-header">
+    <mat-form-field class="full-width">
+      <input matInput #filter placeholder="Ҷустуҷӯ вобаста аз ихтисоси иқтибос">
+    </mat-form-field>
+  </div>
+  <div class="example-container mat-elevation-z8">
+
+    <mat-table class="table-hover" [(dataSource)]="dataSource" matSort>
+
+      <ng-container matColumnDef="number">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> № </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.number}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="speciality">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Ихтисос </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.speciality}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="course">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Курс </mat-header-cell>
+        <mat-cell *matCellDef="let row;"> {{row.course}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="degree">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Дараҷаи таҳсилот </mat-header-cell>
+        <mat-cell *matCellDef="let row;"> {{row.degree}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="type">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Шӯъба </mat-header-cell>
+        <mat-cell *matCellDef="let row;"> {{row.type}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="educationYear">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Соли таҳсил </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.educationYear | educationYear}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="dateOfStandard">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Санаи стандарт </mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.dateOfStandard | date:'dd/MM/yyyy'}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Амалиёт </mat-header-cell>
+        <mat-cell *matCellDef="let row;">
+          <mat-icon class="md-24 hovered-color"
+                    matTooltip="Дидани фанҳои иқтибос"
+                    (click)="openSt(row);">open_with
+          </mat-icon>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;">
+      </mat-row>
+    </mat-table>
+
+    <mat-paginator [length]="dataSource.filteredData.length"
+                   [pageIndex]="0"
+                   [pageSize]="10"
+                   [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div>
+</div>
+<div #curriculum></div>

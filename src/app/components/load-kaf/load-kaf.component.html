@@ -1,0 +1,343 @@
+
+<mat-card class="mat-elevation-z8">
+  <div class="text-center">
+    <h3>Сарборӣ</h3>
+    <h6>
+      барои кафедраи "{{ kafedra.fullName | getName:'tj' }}" - и "{{ faculty.fullName }}"
+    </h6>
+  </div>
+  <span class="print">
+      <mat-icon matTooltip="Чоп намудан"
+                class="md-36 d-print-none"
+                (click)="print();">print</mat-icon>
+  </span>
+</mat-card>
+<div class="report-table">
+  <table class="text-center">
+    <tr>
+      <th rowspan="2">№</th>
+      <th rowspan="2" style="width: 30%;">
+        <h4>Номгӯи фанҳо</h4>
+      </th>
+      <th rowspan="2">
+        <div>Курс</div>
+      </th>
+      <th rowspan="2"> Зинаи таҳсил </th>
+      <th rowspan="2"> Гурӯҳ </th>
+      <th rowspan="2">
+        <div>Шумораи гурӯҳҳо</div>
+      </th>
+      <th rowspan="2">
+        <div>Шумораи зергурӯҳҳо</div>
+      </th>
+      <th rowspan="2">
+        <div>Шумораи донишҷӯён</div>
+      </th>
+      <th rowspan="2">
+        <div>Лоиҳаи курсӣ</div>
+      </th>
+      <th rowspan="2">
+        <div>Кори курсӣ</div>
+      </th>
+      <th rowspan="2">
+        <div>Кори контролӣ</div>
+      </th>
+      <th colspan="2">ЛК</th>
+      <th colspan="2">ОЗМ</th>
+      <th colspan="2">АМ</th>
+      <th colspan="2">СМ</th>
+      <!--<th colspan="2">КМРО</th>-->
+      <th rowspan="2">
+        <div>Ҳамагӣ соатҳои аудиторӣ</div>
+      </th>
+      <th rowspan="2">
+        <div>Имтиҳон</div>
+      </th>
+      <th rowspan="2">
+        <div>Санҷиш</div>
+      </th>
+      <th rowspan="2">
+        <div>Машварат</div>
+      </th>
+      <th rowspan="2">
+        <div>Таҷрибаомӯзиҳо</div>
+      </th>
+      <th rowspan="2">
+        <div>Имтиҳони давлатӣ</div>
+      </th>
+      <th rowspan="2">
+        <div>Лоиҳаи дипломӣ</div>
+      </th>
+      <th rowspan="2">
+        <div>Ҳамагӣ</div>
+      </th>
+    </tr>
+    <tr>
+      <th>
+        <div>Аз рӯи нақша</div>
+      </th>
+      <th>
+        <div>Ҳамагӣ</div>
+      </th>
+      <th>
+        <div>Аз рӯи нақша</div>
+      </th>
+      <th>
+        <div>Ҳамагӣ</div>
+      </th>
+      <th>
+        <div>Аз рӯи нақша</div>
+      </th>
+      <th>
+        <div>Ҳамагӣ</div>
+      </th>
+      <th>
+        <div>Аз рӯи нақша</div>
+      </th>
+      <th>
+        <div>Ҳамагӣ</div>
+      </th>
+      <!--<th>-->
+        <!--<div>Аз рӯи нақша</div>-->
+      <!--</th>-->
+      <!--<th>-->
+        <!--<div>Ҳамагӣ</div>-->
+      <!--</th>-->
+    </tr>
+    <tr>
+      <th *ngFor="let i of rowAmount(27)">{{ i + 1 }}</th>
+    </tr>
+    <ng-template ngFor let-term [ngForOf]="[1, 2]">
+      <ng-template ngFor let-type [ngForOf]="getTypesByTerm(term)">
+        <tr class="bg-eee font-weight-bold">
+          <td colspan="27">НИМСОЛАИ {{ term }} барои гурӯҳҳои {{ type.name }}</td>
+        </tr>
+
+        <ng-template ngFor let-fc [ngForOf]="getFacultiesByType(+type.id, term)">
+          <tr class="bg-aw font-weight-bold">
+            <td colspan="27">{{ fc.fullName }}</td>
+          </tr>
+          <!--<ng-template></ng-template>-->
+          <tr *ngFor="let subject of getSubjects(term, type.id, fc.id); let i = index;"
+              [class.hasError]="subject.hasError === true">
+            <td>{{ i + 1 }}</td>
+            <td class="text-left" style="padding-left: 10px;">{{ subject.subjectName }}</td>
+            <td>{{ subject.course }}</td>
+            <td>{{ subject.degree }}</td>
+            <td>
+              <div style="overflow: hidden; width: 100%; white-space: nowrap;" *ngFor="let g of subject.groups">{{ g }}</div>
+            </td>
+            <td>{{ subject.groupsAmount }}</td>
+            <td>{{ subject.subgroups }}</td>
+            <td>{{ subject.studentsAmount }}</td>
+            <td>{{ subject.courseProject }}</td>
+            <td>{{ subject.courseWork }}</td>
+            <td>{{ subject.workKont }}</td>
+            <td>{{ subject.lecture.plan }}</td>
+            <td>{{ subject.lecture.total }}</td>
+            <td>{{ subject.laboratory.plan }}</td>
+            <td>{{ subject.laboratory.total }}</td>
+            <td>{{ subject.practical.plan }}</td>
+            <td>{{ subject.practical.total }}</td>
+            <td>{{ subject.seminar.plan }}</td>
+            <td>{{ subject.seminar.total }}</td>
+            <!--<td>{{ subject.kmro.plan }}</td>-->
+            <!--<td>{{ subject.kmro.total }}</td>-->
+            <td>
+              <span *ngIf="subject.totalAuditHour !== 0">{{ subject.totalAuditHour }}</span>
+            </td>
+            <td>{{ subject.exam }}</td>
+            <td>{{ subject.checkout }}</td>
+            <td>{{ subject.advice }}</td>
+            <td>{{ subject.practices }}</td>
+            <td>{{ subject.gosExam }}</td>
+            <td>{{ subject.diploma }}</td>
+            <td>
+              <span *ngIf="subject.total !== 0">{{ subject.total }}</span>
+            </td>
+          </tr>
+        </ng-template>
+
+        <tr class="text-total">
+          <td colspan="8">Ҳамагӣ дар нимсолаи {{ term }} барои гурӯҳҳои {{ type.name }}</td>
+          <td>
+            <span *ngIf="sum('cp', term, type.id) !== 0">{{ sum('cp', term, type.id) }}</span>
+          </td>
+          <td>
+            <span *ngIf="sum('cw', term, type.id) !== 0">{{ sum('cw', term, type.id) }}</span>
+          </td>
+          <td>
+            <span *ngIf="sum('wk', term, type.id) !== 0">{{ sum('wk', term, type.id) }}</span>
+          </td>
+          <td></td>
+          <td>
+            <span *ngIf="sum('lkTotal', term, type.id) !== 0">{{ sum('lkTotal', term, type.id) }}</span>
+          </td>
+          <td></td>
+          <td>
+            <span *ngIf="sum('lbTotal', term, type.id) !== 0">{{ sum('lbTotal', term, type.id) }}</span>
+          </td>
+          <td></td>
+          <td>
+            <span *ngIf="sum('prTotal', term, type.id) !== 0">{{ sum('prTotal', term, type.id) }}</span>
+          </td>
+          <td></td>
+          <td>
+            <span *ngIf="sum('smTotal', term, type.id) !== 0">{{ sum('smTotal', term, type.id) }}</span>
+          </td>
+          <!--<td></td>-->
+          <!--<td>-->
+            <!--&lt;!&ndash;<span *ngIf="sum('kmroTotal', term, type.id) !== 0">{{ sum('smTotal', term, type.id) }}</span>&ndash;&gt;-->
+          <!--</td>-->
+          <td>
+            <span *ngIf="sum('tAH', term, type.id) !== 0">{{ sum('tAH', term, type.id) }}</span>
+          </td>
+          <td>
+            <span *ngIf="sum('exam', term, type.id) !== 0">{{ sum('exam', term, type.id) }}</span>
+          </td>
+          <td>
+            <span *ngIf="sum('checkout', term, type.id) !== 0">{{ sum('exam', term, type.id) }}</span>
+          </td>
+          <td>
+            <span *ngIf="sum('advice', term, type.id) !== 0">{{ sum('advice', term, type.id) }}</span>
+          </td>
+          <td>
+            <span *ngIf="sum('prac', term, type.id) !== 0">{{ sum('prac', term, type.id) }}</span>
+          </td>
+          <td>
+            <span *ngIf="sum('gosExam', term, type.id) !== 0">{{ sum('gosExam', term, type.id) }}</span>
+
+          </td>
+          <td>
+            <span *ngIf="sum('diploma', term, type.id) !== 0">{{ sum('diploma', term, type.id) }}</span>
+          </td>
+          <td>
+            <span *ngIf="sum('total', term, type.id) !== 0">{{ sum('total', term, type.id) }}</span>
+          </td>
+        </tr>
+      </ng-template>
+      <tr class="text-total">
+        <td colspan="8">Ҳамагӣ дар нимсолаи {{ term }} барои кафедраи "{{ kafedra.shortName | getName:'tj' }}"</td>
+        <td>
+          <span *ngIf="sum('cp', term) !== 0">{{ sum('cp', term) }}</span>
+        </td>
+        <td>
+          <span *ngIf="sum('cw', term) !== 0">{{ sum('cw', term) }}</span>
+        </td>
+        <td>
+          <span *ngIf="sum('wk', term) !== 0">{{ sum('wk', term) }}</span>
+        </td>
+        <td></td>
+        <td>
+          <span *ngIf="sum('lkTotal', term) !== 0">{{ sum('lkTotal', term) }}</span>
+        </td>
+        <td></td>
+        <td>
+          <span *ngIf="sum('lbTotal', term) !== 0">{{ sum('lbTotal', term) }}</span>
+        </td>
+        <td></td>
+        <td>
+          <span *ngIf="sum('prTotal', term) !== 0">{{ sum('prTotal', term) }}</span>
+        </td>
+        <td></td>
+        <td>
+          <span *ngIf="sum('smTotal', term) !== 0">{{ sum('smTotal', term) }}</span>
+        </td>
+        <!--<td></td>-->
+        <!--<td>-->
+          <!--<span *ngIf="sum('kmroTotal', term) !== 0">{{ sum('smTotal', term) }}</span>-->
+        <!--</td>-->
+        <td>
+          <span *ngIf="sum('tAH', term) !== 0">{{ sum('tAH', term) }}</span>
+        </td>
+        <td>
+          <span *ngIf="sum('exam', term) !== 0">{{ sum('exam', term) }}</span>
+        </td>
+        <td>
+          <span *ngIf="sum('checkout', term) !== 0">{{ sum('exam', term) }}</span>
+        </td>
+        <td>
+          <span *ngIf="sum('advice', term) !== 0">{{ sum('advice', term) }}</span>
+        </td>
+        <td>
+          <span *ngIf="sum('prac', term) !== 0">{{ sum('prac', term) }}</span>
+        </td>
+        <td>
+          <span *ngIf="sum('gosExam', term) !== 0">{{ sum('gosExam', term) }}</span>
+
+        </td>
+        <td>
+          <span *ngIf="sum('diploma', term) !== 0">{{ sum('diploma', term) }}</span>
+        </td>
+        <td>
+          <span *ngIf="sum('total', term) !== 0">{{ sum('total', term) }}</span>
+        </td>
+      </tr>
+    </ng-template>
+
+    <tr class="text-total">
+      <td colspan="8">Ҳамагӣ барои кафедраи "{{ kafedra.shortName | getName:'tj' }}"</td>
+      <td>
+        <span *ngIf="sum('cp') !== 0">{{ sum('cp') }}</span>
+      </td>
+      <td>
+        <span *ngIf="sum('cw') !== 0">{{ sum('cw') }}</span>
+      </td>
+      <td>
+        <span *ngIf="sum('wk') !== 0">{{ sum('wk') }}</span>
+      </td>
+      <td></td>
+      <td>
+        <span *ngIf="sum('lkTotal') !== 0">{{ sum('lkTotal') }}</span>
+      </td>
+      <td></td>
+      <td>
+        <span *ngIf="sum('lbTotal') !== 0">{{ sum('lbTotal') }}</span>
+      </td>
+      <td></td>
+      <td>
+        <span *ngIf="sum('prTotal') !== 0">{{ sum('prTotal') }}</span>
+      </td>
+      <td></td>
+      <td>
+        <span *ngIf="sum('smTotal') !== 0">{{ sum('smTotal') }}</span>
+      </td>
+      <!--<td></td>-->
+      <!--<td>-->
+        <!--<span *ngIf="sum('kmroTotal') !== 0">{{ sum('smTotal') }}</span>-->
+      <!--</td>-->
+      <td>
+        <span *ngIf="sum('tAH') !== 0">{{ sum('tAH') }}</span>
+      </td>
+      <td>
+        <span *ngIf="sum('exam') !== 0">{{ sum('exam') }}</span>
+      </td>
+      <td>
+        <span *ngIf="sum('checkout') !== 0">{{ sum('exam') }}</span>
+      </td>
+      <td>
+        <span *ngIf="sum('advice') !== 0">{{ sum('advice') }}</span>
+      </td>
+      <td>
+        <span *ngIf="sum('prac') !== 0">{{ sum('prac') }}</span>
+      </td>
+      <td>
+        <span *ngIf="sum('gosExam') !== 0">{{ sum('gosExam') }}</span>
+
+      </td>
+      <td>
+        <span *ngIf="sum('diploma') !== 0">{{ sum('diploma') }}</span>
+      </td>
+      <td>
+        <span *ngIf="sum('total') !== 0">{{ sum('total') }}</span>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="text-center alert alert-info mat-elevation-z8 d-print-none" *ngIf="isError">
+  <h3><strong>Эзоҳ:</strong></h3>
+  <h5>Фаннҳое ки бо ранги зард ҷудо шудаанд селенамоӣ шудаанд вале миқдори соатҳои дарсиашон якхела нестанд,
+  масалан миқдори соатҳои амалӣ, лабараторӣ ё дигарашон баробар нестанд.
+  Аз кормандони шуъбаи таълим хоҳиш намоед, ки иқтибосҳои ин гуруҳҳоро лутфан дида бароянд!!!</ h5>
+</div>

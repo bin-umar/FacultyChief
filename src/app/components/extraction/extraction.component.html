@@ -1,0 +1,453 @@
+<div id="container">
+  <mat-card class="mat-elevation-z8">
+    <div class="text-center">
+      <h3>Иқтибос</h3>
+      <h6>
+        аз нақшаи таълимии ихтисоси {{ Curriculum.speciality }} барои курси
+        {{ Curriculum.course }} (нимсолаи {{ Curriculum.course * 2 - 1 }} ва {{ Curriculum.course * 2}})
+        шӯъбаи {{ Curriculum.type }}, дараҷаи таҳсилоти {{ Curriculum.degree }}
+        тибқи нақшаи таълимии тасдиқшудаи санаи {{ Curriculum.dateOfStandard | date:'dd/MM/yyyy'}}
+        (низоми таҳсилоти кредитӣ)
+      </h6>
+    </div>
+    <span class="print">
+      <mat-icon matTooltip="Чоп намудан"
+              class="md-36 d-print-none"
+              (click)="print();">print</mat-icon>
+    </span>
+  </mat-card>
+  <div>
+    <table class="extraction">
+      <thead>
+      <tr>
+        <th rowspan="2">№</th>
+        <th rowspan="2" style="width: 30%;">
+          <h4>Номгӯи фанҳо</h4>
+        </th>
+        <th rowspan="2">
+          <div>Ҳаҷми умумии кредитҳо аз рӯи стандарт</div>
+        </th>
+        <th rowspan="2">
+          <div>Кредитҳои аудиторӣ</div>
+        </th>
+        <th rowspan="2">
+          <div>Соатҳои дарсӣ</div>
+        </th>
+
+        <ng-template [ngIf]="Curriculum.type === types[2].name">
+          <th rowspan="2">
+            <div>КМРО(ҳузурии ғ/фаъол), кредит</div>
+          </th>
+          <th rowspan="2">
+            <div>КМРО(ҳузурии ғ/фаъол), соат</div>
+          </th>
+        </ng-template>
+
+        <th rowspan="2">
+          <div>Имтиҳон</div>
+        </th>
+        <th *ngIf="Curriculum.type === types[0].name" rowspan="2">
+          <div>КМД</div>
+        </th>
+        <th rowspan="2">
+          <div>Лоиҳаи курсӣ</div>
+        </th>
+        <th rowspan="2">
+          <div>Кори курсӣ</div>
+        </th>
+        <th *ngIf="Curriculum.type === types[1].name" rowspan="2">
+          <div>Кори контролӣ</div>
+        </th>
+        <th colspan="2">ЛК</th>
+        <th colspan="2">ОЗМ</th>
+        <th colspan="2">АМ</th>
+        <th colspan="2">СМ</th>
+
+        <ng-template [ngIf]="Curriculum.type === types[0].name">
+          <th rowspan="2">
+            <div>Таҷрибаомӯзии таълимӣ</div>
+          </th>
+          <th rowspan="2">
+            <div>Таҷрибаомӯзии истеҳсолӣ</div>
+          </th>
+        </ng-template>
+
+        <th *ngIf="Curriculum.type === types[2].name" rowspan="2">
+          <div>Маслиҳат</div>
+        </th>
+        <th rowspan="2">
+          <div>Таҷрибаомӯзии пешаздипломӣ</div>
+        </th>
+        <th rowspan="2">
+          <div>Кори бакалаврӣ</div>
+        </th>
+        <th rowspan="2">
+          <div>Ком.имт.давлатӣ</div>
+        </th>
+        <th rowspan="2">
+          <div>Ҳамагӣ</div>
+        </th>
+        <th rowspan="2">
+          <div>Номгӯи кафедраи муттасадии фани таълимӣ</div>
+        </th>
+        <th class="d-print-none" *ngIf="Curriculum.locked === 0" rowspan="2">
+          <div>Амалиёт</div>
+        </th>
+        <th rowspan="2" class="d-none sign-column">
+          <div>Имзои мудири кафедраи дахлдор</div>
+        </th>
+      </tr>
+      <tr>
+        <th>
+          <div>Аз рӯи нақша</div>
+        </th>
+        <th>
+          <div>Ҳамагӣ</div>
+        </th>
+        <th>
+          <div>Аз рӯи нақша</div>
+        </th>
+        <th>
+          <div>Ҳамагӣ</div>
+        </th>
+        <th>
+          <div>Аз рӯи нақша</div>
+        </th>
+        <th>
+          <div>Ҳамагӣ</div>
+        </th>
+        <th>
+          <div>Аз рӯи нақша</div>
+        </th>
+        <th>
+          <div>Ҳамагӣ</div>
+        </th>
+      </tr>
+
+      <ng-template [ngIf]="Curriculum.type === types[0].name">
+        <tr>
+          <th *ngFor="let i of rowAmount(24)">{{i}}</th>
+          <th class="d-print-none" *ngIf="Curriculum.locked === 0">25</th>
+          <th class="d-none">25</th>
+        </tr>
+      </ng-template>
+
+      <ng-template [ngIf]="Curriculum.type === types[1].name">
+        <tr>
+          <th *ngFor="let i of rowAmount(22)">{{i}}</th>
+          <th class="d-print-none" *ngIf="Curriculum.locked === 0">23</th>
+          <th class="d-none">23</th>
+        </tr>
+      </ng-template>
+
+      <ng-template [ngIf]="Curriculum.type === types[2].name">
+        <tr>
+          <th *ngFor="let i of rowAmount(23)">{{i}}</th>
+          <th class="d-print-none" *ngIf="Curriculum.locked === 0">24</th>
+          <th class="d-none">24</th>
+        </tr>
+      </ng-template>
+      </thead>
+      <ng-template ngFor let-semester [ngForOf]="[1,2]">
+        <tr class="bg-eee">
+          <td colspan="25">НИМСОЛАИ {{ semester }} (СЕМЕСТРИ {{(Curriculum.course - 1) * 2 + semester}})</td>
+        </tr>
+        <ng-template ngFor let-i="index" let-subject [ngForOf]="getSubjectsByTerm(semester)">
+          <tr>
+            <td>{{ i + 1 }}</td>
+            <td class="text-left" style="padding-left: 10px;">
+              {{ subject.name }}
+              <ng-template [ngIf]="subject.selective === 1">
+                (интихобӣ)
+              </ng-template>
+            </td>
+            <td>
+              <span *ngIf="subject.credits !== 0">{{ subject.credits }}</span>
+            </td>
+            <td>
+              <span *ngIf="subject.auditCredits !== 0">{{ subject.auditCredits }}</span>
+            </td>
+            <td>
+              <span *ngIf="subject.lessonHours !== 0 ">{{ subject.lessonHours }}</span>
+            </td>
+
+            <ng-template [ngIf]="Curriculum.type === types[2].name">
+              <td>
+                <span *ngIf="subject.kmroCredits !== 0 ">{{ subject.kmroCredits }}</span>
+              </td>
+              <td>
+                <span *ngIf="subject.kmroHour !== 0 ">{{ subject.kmroHour }}</span>
+              </td>
+            </ng-template>
+
+            <td>
+              <span *ngIf="+subject.exam !== 0 ">{{ subject.exam }}</span>
+            </td>
+            <td *ngIf="Curriculum.type === types[0].name" >
+              <span *ngIf="+subject.kmd !== 0 ">{{ subject.kmd }}</span>
+            </td>
+            <td>
+              <span *ngIf="subject.courseProject !== 0 ">{{ subject.courseProject }}</span>
+            </td>
+            <td>
+              <span *ngIf="subject.courseWork !== 0 ">{{ subject.courseWork }}</span>
+            </td>
+            <td *ngIf="Curriculum.type === types[1].name">
+              <span *ngIf="subject.workKont !== 0 ">{{ subject.workKont }}</span>
+            </td>
+            <td>
+              <span *ngIf="subject.lkPlan !== 0 ">{{ subject.lkPlan }}</span>
+            </td>
+            <td>
+              <span *ngIf="subject.lkTotal !== 0 ">{{ subject.lkTotal }}</span>
+            </td>
+            <td>
+              <span *ngIf="subject.lbPlan !== 0 ">{{ subject.lbPlan }}</span>
+            </td>
+            <td>
+              <span *ngIf="subject.lbTotal !== 0 ">{{ subject.lbTotal }}</span>
+            </td>
+            <td>
+              <span *ngIf="subject.prPlan !== 0 ">{{ subject.prPlan }}</span>
+            </td>
+            <td>
+              <span *ngIf="subject.prTotal !== 0 ">{{ subject.prTotal }}</span>
+            </td>
+            <td>
+              <span *ngIf="subject.smPlan !== 0 ">{{ subject.smPlan }}</span>
+            </td>
+            <td>
+              <span *ngIf="subject.smTotal !== 0 ">{{ subject.smTotal }}</span>
+            </td>
+
+            <ng-template [ngIf]="Curriculum.type === types[0].name">
+              <td>
+                <span *ngIf="subject.trainingPrac !== 0 ">{{ subject.trainingPrac }}</span>
+              </td>
+              <td>
+                <span *ngIf="subject.manuPrac !== 0 ">{{ subject.manuPrac }}</span>
+              </td>
+            </ng-template>
+
+            <td *ngIf="Curriculum.type === types[2].name">
+              <span *ngIf="subject.advice !== 0 ">{{ subject.advice }}</span>
+            </td>
+            <td>
+              <span *ngIf="subject.diplomPrac !== 0 ">{{ subject.diplomPrac }}</span>
+            </td>
+            <td>
+              <span *ngIf="subject.bachelorWork !== 0 ">{{ subject.bachelorWork }}</span>
+            </td>
+            <td>
+              <span *ngIf="subject.gosExam !== 0 ">{{ subject.gosExam }}</span>
+            </td>
+            <td>
+              <span *ngIf="total(subject) !== 0">{{ total(subject) }}</span>
+            </td>
+            <td>
+              <span>{{ subject.kfName | getName:'tj' }}</span>
+            </td>
+            <td class="d-none"></td>
+          </tr>
+        </ng-template>
+        <tr class="text-total">
+          <td colspan="2">Ҳамагӣ</td>
+          <td>
+            <span *ngIf="sum('credits', semester) !== 0">{{ sum('credits', semester) }}</span>
+          </td>
+          <td>
+            <span *ngIf="sum('auditCredits', semester) !== 0">{{ sum('auditCredits', semester) }}</span>
+          </td>
+          <td>
+            <span *ngIf="sum('lessonHours', semester) !== 0">{{ sum('lessonHours', semester) }}</span>
+          </td>
+
+          <ng-template [ngIf]="Curriculum.type === types[2].name">
+            <td>
+              <span *ngIf="sum('kmroCredits', semester) !== 0">{{ sum('kmroCredits', semester) }}</span>
+            </td>
+            <td>
+              <span *ngIf="sum('kmroHour', semester) !== 0">{{ sum('kmroHour', semester) }}</span>
+            </td>
+          </ng-template>
+
+          <td></td>
+          <td *ngIf="Curriculum.type === types[0].name"></td>
+          <td></td>
+          <td></td>
+          <td *ngIf="Curriculum.type === types[1].name"></td>
+          <td>
+            <span *ngIf="sum('lkPlan', semester) !== 0">{{ sum('lkPlan', semester) }}</span>
+          </td>
+          <td>
+            <span *ngIf="sum('lkTotal', semester) !== 0">{{ sum('lkTotal', semester) }}</span>
+          </td>
+          <td>
+            <span *ngIf="sum('lbPlan', semester) !== 0">{{ sum('lbPlan', semester) }}</span>
+          </td>
+          <td>
+            <span *ngIf="sum('lbTotal', semester) !== 0">{{ sum('lbTotal', semester) }}</span>
+          </td>
+          <td>
+            <span *ngIf="sum('prPlan', semester) !== 0">{{ sum('prPlan', semester) }}</span>
+          </td>
+          <td>
+            <span *ngIf="sum('prTotal', semester) !== 0">{{ sum('prTotal', semester) }}</span>
+          </td>
+          <td>
+            <span *ngIf="sum('smPlan', semester) !== 0">{{ sum('smPlan', semester) }}</span>
+          </td>
+          <td>
+            <span *ngIf="sum('smTotal', semester) !== 0">{{ sum('smTotal', semester) }}</span>
+          </td>
+
+          <td *ngIf="Curriculum.type === types[2].name">
+            <span *ngIf="sum('advice', semester) !== 0">{{ sum('advice', semester) }}</span>
+          </td>
+          <ng-template [ngIf]="Curriculum.type === types[0].name">
+            <td>
+              <span *ngIf="sum('trainingPrac', semester) !== 0">{{ sum('trainingPrac', semester) }}</span>
+            </td>
+            <td>
+              <span *ngIf="sum('manuPrac', semester) !== 0">{{ sum('manuPrac', semester) }}</span>
+            </td>
+          </ng-template>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>
+            <span *ngIf="sum('total', semester) !== 0">{{ sum('total', semester) }}</span>
+          </td>
+          <td></td>
+          <td class="d-none"></td>
+          <td class="d-print-none" *ngIf="Curriculum.locked === 0"></td>
+        </tr>
+      </ng-template>
+      <tr class="text-total">
+        <td colspan="2">Ҷамъ</td>
+        <td>
+          <span *ngIf="sum('credits') !== 0">{{ sum('credits') }}</span>
+        </td>
+        <td>
+          <span *ngIf="sum('auditCredits') !== 0">{{ sum('auditCredits') }}</span>
+        </td>
+        <td>
+          <span *ngIf="sum('lessonHours') !== 0">{{ sum('lessonHours') }}</span>
+        </td>
+
+        <ng-template [ngIf]="Curriculum.type === types[2].name">
+          <td>
+            <span *ngIf="sum('kmroCredits') !== 0">{{ sum('kmroCredits') }}</span>
+          </td>
+          <td>
+            <span *ngIf="sum('kmroHour') !== 0">{{ sum('kmroHour') }}</span>
+          </td>
+        </ng-template>
+
+        <td></td>
+        <td *ngIf="Curriculum.type === types[0].name" ></td>
+        <td></td>
+        <td></td>
+        <td *ngIf="Curriculum.type === types[1].name"></td>
+        <td>
+          <span *ngIf="sum('lkPlan') !== 0">{{ sum('lkPlan') }}</span>
+        </td>
+        <td>
+          <span *ngIf="sum('lkTotal') !== 0">{{ sum('lkTotal') }}</span>
+        </td>
+        <td>
+          <span *ngIf="sum('lbPlan') !== 0">{{ sum('lbPlan') }}</span>
+        </td>
+        <td>
+          <span *ngIf="sum('lbTotal') !== 0">{{ sum('lbTotal') }}</span>
+        </td>
+        <td>
+          <span *ngIf="sum('prPlan') !== 0">{{ sum('prPlan') }}</span>
+        </td>
+        <td>
+          <span *ngIf="sum('prTotal') !== 0">{{ sum('prTotal') }}</span>
+        </td>
+        <td>
+          <span *ngIf="sum('smPlan') !== 0">{{ sum('smPlan') }}</span>
+        </td>
+        <td>
+          <span *ngIf="sum('smTotal') !== 0">{{ sum('smTotal') }}</span>
+        </td>
+        <td *ngIf="Curriculum.type === types[2].name">
+          <span *ngIf="sum('advice') !== 0">{{ sum('advice') }}</span>
+        </td>
+        <ng-template [ngIf]="Curriculum.type === types[0].name">
+          <td>
+            <span *ngIf="sum('trainingPrac') !== 0">{{ sum('trainingPrac') }}</span>
+          </td>
+          <td>
+            <span *ngIf="sum('manuPrac') !== 0">{{ sum('manuPrac') }}</span>
+          </td>
+        </ng-template>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>
+          <span *ngIf="sum('total') !== 0">{{ sum('total') }}</span>
+        </td>
+        <td></td>
+        <td class="d-none"></td>
+        <td class="d-print-none" *ngIf="Curriculum.locked === 0"></td>
+      </tr>
+    </table>
+    <div class="extraction-footer text-center">
+      <div class="half-width">
+        <div>{{ printInfo.kfChiefPosition + 'и' }}
+          <span matTooltip="{{ printInfo.kf_full_name | getName:'tj' }}">
+          {{ printInfo.kf_short_name | getName:'tj' }}
+        </span>
+        </div>
+        <div>
+          <div>
+            <p class="sign-gap">_________________</p>
+          </div>
+        </div>
+        <div>
+        <span matTooltip="{{ printInfo.kf_chief }}">
+            {{ printInfo.kf_chief | teacherName }}
+        </span>
+        </div>
+      </div>
+
+      <div class="half-width text-center">
+        <div>
+          <div>Декани
+            <span matTooltip="{{ printInfo.fFac_NameTaj }}">
+            {{ printInfo.fFac_NameTajShort }}
+          </span>
+          </div>
+        </div>
+        <div>
+          <div>
+            <p class="sign-gap">_________________</p>
+          </div>
+        </div>
+        <div>
+        <span matTooltip="{{ printInfo.fFac_Dekan }}">
+          {{ printInfo.fFac_Dekan | teacherName }}
+        </span>
+        </div>
+      </div>
+
+      <div class="text-center full-width">
+        <div>Сардори ИТМ</div>
+        <div>
+          <div>
+            <p class="sign-gap">_________________</p>
+          </div>
+        </div>
+        <div>
+        <span matTooltip="{{ printInfo.itm_chief }}">
+          {{ printInfo.itm_chief | teacherName }}
+        </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
