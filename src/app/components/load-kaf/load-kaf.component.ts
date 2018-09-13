@@ -9,7 +9,7 @@ import { ILoadKafSubject, LoadKaf, LoadKafReport } from '../../models/load-kaf';
 @Component({
   selector: 'app-load-kaf',
   templateUrl: './load-kaf.component.html',
-  styleUrls: ['../extraction/extraction.component.css'],
+  styleUrls: ['./load-kaf.component.css'],
   providers: [ LoadKafService ]
 })
 

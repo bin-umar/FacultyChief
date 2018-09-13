@@ -4,7 +4,7 @@ table th, table td{
 }
 
 table th{
- background-color: #343a40;
+  background-color: #343a40;
   color: #167F92;
 }
 
@@ -12,6 +12,7 @@ table{
   width: 100%;
   text-align: center;
   margin: 20px 0;
+  /*font-size: 14px;*/
 }
 
 .alert:first-child {
@@ -156,14 +157,14 @@ th div{
   background-color: #ffeb3b;
 }
 
-/deep/ .extraction-footer .half-width {
+.extraction-footer .half-width {
   width: 49.5%;
   margin-bottom: 15px;
   display: inline-block;
 }
 
-/deep/ .extraction-footer .half-width>div,
-/deep/ .extraction-footer .full-width>div{
+.extraction-footer .half-width>div,
+.extraction-footer .full-width>div{
   display: inline-block;
 }
 
@@ -171,35 +172,35 @@ th div{
   background-color: antiquewhite;
 }
 
-/deep/ .sign-gap {
+.sign-gap {
   margin: 0 7px -27px 7px;
 }
 
 @media print {
-  /deep/ body {
-    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,
-                sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+   /deep/ body {
+    font: 11pt Georgia, "Times New Roman", Times, serif;
+    line-height: 1.2;
     color: #000 !important;
     background: #FFF;
   }
 
-   /deep/ @page {
-    margin: 10px 0 15px 0;
+  /deep/ @page {
+    margin: 10px 15px 15px 0 ;
   }
-
-  table{ margin: 0 0 13px 0; font-size: 7pt;}
 
   table tr {
     height: 15px;
   }
 
-  /*mat-card.teacher-info { margin-bottom: -10px; }*/
+  table {
+    margin: 0 0 13px 0;
+  }
 
   mat-card { margin: -10px 0 0 0;}
 
   mat-card h3 { font-size: 18pt; }
   h4 { font-size: 16px;}
-  mat-card h6 { font-size: 11pt; }
+  mat-card h6 { font-size: 14pt; }
 
   th div {
     height: 140px;
@@ -214,21 +215,13 @@ th div{
     margin: auto;
   }
 
-  table th, table td{ padding: 1px 0;}
-
-  table th{
+  table th, table td{
+    padding: 1px 0;
     background-color: #fff;
     color: #000;
-    font-size: 9pt;
   }
 
   .extraction .d-none {
     display: table-cell !important;
   }
-
-  /deep/ table { page-break-after: auto !important; }
-  /deep/ tr { page-break-inside: avoid !important; page-break-after: auto !important; }
-  /deep/ td { page-break-inside: avoid !important; page-break-after: auto !important; }
-  /deep/ thead { display: table-header-group !important; }
-  /deep/ tfoot { display: table-footer-group !important; }
 }

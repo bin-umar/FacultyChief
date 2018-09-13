@@ -56,7 +56,7 @@
       <th colspan="2">ОЗМ</th>
       <th colspan="2">АМ</th>
       <th colspan="2">СМ</th>
-      <!--<th colspan="2">КМРО</th>-->
+      <th colspan="2">КМРО</th>
       <th rowspan="2">
         <div>Ҳамагӣ соатҳои аудиторӣ</div>
       </th>
@@ -107,27 +107,26 @@
       <th>
         <div>Ҳамагӣ</div>
       </th>
-      <!--<th>-->
-        <!--<div>Аз рӯи нақша</div>-->
-      <!--</th>-->
-      <!--<th>-->
-        <!--<div>Ҳамагӣ</div>-->
-      <!--</th>-->
+      <th>
+        <div>Аз рӯи нақша</div>
+      </th>
+      <th>
+        <div>Ҳамагӣ</div>
+      </th>
     </tr>
     <tr>
-      <th *ngFor="let i of rowAmount(27)">{{ i + 1 }}</th>
+      <th *ngFor="let i of rowAmount(29)">{{ i + 1 }}</th>
     </tr>
     <ng-template ngFor let-term [ngForOf]="[1, 2]">
       <ng-template ngFor let-type [ngForOf]="getTypesByTerm(term)">
         <tr class="bg-eee font-weight-bold">
-          <td colspan="27">НИМСОЛАИ {{ term }} барои гурӯҳҳои {{ type.name }}</td>
+          <td colspan="29">НИМСОЛАИ {{ term }} барои гурӯҳҳои {{ type.name }}</td>
         </tr>
 
         <ng-template ngFor let-fc [ngForOf]="getFacultiesByType(+type.id, term)">
           <tr class="bg-aw font-weight-bold">
-            <td colspan="27">{{ fc.fullName }}</td>
+            <td colspan="29">{{ fc.fullName }}</td>
           </tr>
-          <!--<ng-template></ng-template>-->
           <tr *ngFor="let subject of getSubjects(term, type.id, fc.id); let i = index;"
               [class.hasError]="subject.hasError === true">
             <td>{{ i + 1 }}</td>
@@ -151,8 +150,8 @@
             <td>{{ subject.practical.total }}</td>
             <td>{{ subject.seminar.plan }}</td>
             <td>{{ subject.seminar.total }}</td>
-            <!--<td>{{ subject.kmro.plan }}</td>-->
-            <!--<td>{{ subject.kmro.total }}</td>-->
+            <td>{{ subject.kmro.plan }}</td>
+            <td>{{ subject.kmro.total }}</td>
             <td>
               <span *ngIf="subject.totalAuditHour !== 0">{{ subject.totalAuditHour }}</span>
             </td>
@@ -195,10 +194,10 @@
           <td>
             <span *ngIf="sum('smTotal', term, type.id) !== 0">{{ sum('smTotal', term, type.id) }}</span>
           </td>
-          <!--<td></td>-->
-          <!--<td>-->
-            <!--&lt;!&ndash;<span *ngIf="sum('kmroTotal', term, type.id) !== 0">{{ sum('smTotal', term, type.id) }}</span>&ndash;&gt;-->
-          <!--</td>-->
+          <td></td>
+          <td>
+            <span *ngIf="sum('kmroTotal', term, type.id) !== 0">{{ sum('smTotal', term, type.id) }}</span>
+          </td>
           <td>
             <span *ngIf="sum('tAH', term, type.id) !== 0">{{ sum('tAH', term, type.id) }}</span>
           </td>
@@ -206,7 +205,7 @@
             <span *ngIf="sum('exam', term, type.id) !== 0">{{ sum('exam', term, type.id) }}</span>
           </td>
           <td>
-            <span *ngIf="sum('checkout', term, type.id) !== 0">{{ sum('exam', term, type.id) }}</span>
+            <span *ngIf="sum('checkout', term, type.id) !== 0">{{ sum('checkout', term, type.id) }}</span>
           </td>
           <td>
             <span *ngIf="sum('advice', term, type.id) !== 0">{{ sum('advice', term, type.id) }}</span>
@@ -253,10 +252,10 @@
         <td>
           <span *ngIf="sum('smTotal', term) !== 0">{{ sum('smTotal', term) }}</span>
         </td>
-        <!--<td></td>-->
-        <!--<td>-->
-          <!--<span *ngIf="sum('kmroTotal', term) !== 0">{{ sum('smTotal', term) }}</span>-->
-        <!--</td>-->
+        <td></td>
+        <td>
+          <span *ngIf="sum('kmroTotal', term) !== 0">{{ sum('kmroTotal', term) }}</span>
+        </td>
         <td>
           <span *ngIf="sum('tAH', term) !== 0">{{ sum('tAH', term) }}</span>
         </td>
@@ -264,7 +263,7 @@
           <span *ngIf="sum('exam', term) !== 0">{{ sum('exam', term) }}</span>
         </td>
         <td>
-          <span *ngIf="sum('checkout', term) !== 0">{{ sum('exam', term) }}</span>
+          <span *ngIf="sum('checkout', term) !== 0">{{ sum('checkout', term) }}</span>
         </td>
         <td>
           <span *ngIf="sum('advice', term) !== 0">{{ sum('advice', term) }}</span>
@@ -312,10 +311,10 @@
       <td>
         <span *ngIf="sum('smTotal') !== 0">{{ sum('smTotal') }}</span>
       </td>
-      <!--<td></td>-->
-      <!--<td>-->
-        <!--<span *ngIf="sum('kmroTotal') !== 0">{{ sum('smTotal') }}</span>-->
-      <!--</td>-->
+      <td></td>
+      <td>
+        <span *ngIf="sum('kmroTotal') !== 0">{{ sum('kmroTotal') }}</span>
+      </td>
       <td>
         <span *ngIf="sum('tAH') !== 0">{{ sum('tAH') }}</span>
       </td>
@@ -323,7 +322,7 @@
         <span *ngIf="sum('exam') !== 0">{{ sum('exam') }}</span>
       </td>
       <td>
-        <span *ngIf="sum('checkout') !== 0">{{ sum('exam') }}</span>
+        <span *ngIf="sum('checkout') !== 0">{{ sum('checkout') }}</span>
       </td>
       <td>
         <span *ngIf="sum('advice') !== 0">{{ sum('advice') }}</span>
