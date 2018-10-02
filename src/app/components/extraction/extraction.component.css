@@ -175,6 +175,12 @@ th div{
   margin: 0 7px -27px 7px;
 }
 
+.today {
+  position: fixed;
+  bottom: 10px;
+  right: 20px;
+}
+
 @media print {
   /deep/ body {
     font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,
@@ -226,9 +232,14 @@ th div{
     display: table-cell !important;
   }
 
+  div.today {
+    display: block !important;
+  }
+
   /deep/ table { page-break-after: auto !important; }
   /deep/ tr { page-break-inside: avoid !important; page-break-after: auto !important; }
   /deep/ td { page-break-inside: avoid !important; page-break-after: auto !important; }
   /deep/ thead { display: table-header-group !important; }
   /deep/ tfoot { display: table-footer-group !important; }
 }
+

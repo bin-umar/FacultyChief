@@ -19,6 +19,8 @@ export class TeacherLoadComponent implements OnInit {
   @Output() cmpName: any = 'Сарбории омӯзгорони кафедра';
   @Input() depInfo: DepartmentInfo;
 
+  today: number = Date.now();
+
   kafedra: Department = {
     id: null,
     shortName: '',
@@ -73,10 +75,10 @@ export class TeacherLoadComponent implements OnInit {
   selectTeacher() {
     this.subjects = [];
 
-    this.lkService.getTeacherReport(this.selectedTeacher.id).subscribe(resp => {
+    this.lkService.getTeacherReport(this.selectedTeacher.id, this.depInfo.kfId).subscribe(resp => {
       if (!resp.error) {
 
-        this.lkService.getTeacherCourseWorks(this.selectedTeacher.id).subscribe(response => {
+        this.lkService.getTeacherCourseWorks(this.selectedTeacher.id, this.depInfo.kfId).subscribe(response => {
           if (!response.error) {
 
             const subjects: LoadKaf[] = [...resp.data, ...response.data];
