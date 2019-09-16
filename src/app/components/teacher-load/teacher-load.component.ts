@@ -88,7 +88,7 @@ export class TeacherLoadComponent implements OnInit {
               subject.degree = this.auth.DEGREES[+subject.degree];
             });
 
-            const teacherLoad = new LoadKafReport(subjects, this.lkService.coefs);
+            const teacherLoad = new LoadKafReport(subjects, this.lkService.coefs, true);
             this.subjects = teacherLoad.getSubjects();
             this.countTeacherLoad();
           }
