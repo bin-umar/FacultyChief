@@ -194,7 +194,7 @@ export class LoadKafReport {
               subject.practical.plan = +o.hour;
               subject.practical.total += this.ToFixed(+o.hour);
 
-              if ((+o.isArch > 0 && subject.exam === null) || !subject.lecture.plan) {
+              if ((+o.isArch > 0 && subject.exam === null) || (!subject.lecture.plan && +o.isArch > 0)) {
                 if (o.exam !== '') {
                   if (+o.type === 1 || +o.type === 135) {
                     if (subject.degree === 'бакалавр') {
@@ -228,7 +228,7 @@ export class LoadKafReport {
             case 10: subject.practices = +o.hour; break;
             case 11: {
               if (subject.degree === 'бакалавр') {
-                subject.practices = this.ToFixed(this.coefs.bachelor.practice * subject.studentsAmount);
+                subject.practices = this.ToFixed(this.coefs.bachelor.practice * subject.groupsAmount);
               } else if (subject.degree === 'магистр') {
                 subject.practices = this.ToFixed(this.coefs.master.practice * subject.studentsAmount);
               }
